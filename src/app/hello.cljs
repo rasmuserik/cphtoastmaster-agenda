@@ -4,10 +4,12 @@
     [solsort.util :refer  [route log]]
     [reagent.core :as reagent :refer  []]
     [solsort.util :refer  [<ajax]]
-    [cljs.core.async :refer  [>! <! chan put! take! timeout close! pipe]])
-
-  )
+    [cljs.core.async :refer  [>! <! chan put! take! timeout close! pipe]]))
 
 (go
-  (js/console.log (<! (<ajax "//solsort.com/cors/http/tmclub.eu/portal.php?page=1&c=381" :result "text")))
+  (let 
+    [club-site (<! (<ajax "//solsort.com/cors/http/tmclub.eu/portal.php?page=842" :result "text"))  
+     dom (.parseFromString  (js/DOMParser.) club-site "text/html")
+     ]
+  (js/console.log dom))
   )
