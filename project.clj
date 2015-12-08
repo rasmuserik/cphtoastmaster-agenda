@@ -1,6 +1,4 @@
 (defproject app/hello "0.0.1"
-  :description ".."
-  :url "https://github.com/rasmuserik/.."
   :dependencies
   [[org.clojure/clojure "1.8.0-RC2"]
    [org.clojure/clojurescript "1.7.170"]
@@ -19,12 +17,10 @@
   :source-paths ["src/"]
 
   :clean-targets ^{:protect false} 
-  [
-   "resources/public/out"
+  ["resources/public/out"
    "resources/public/index.js"
-   "target/"
    "figwheel_server.log"
-   ]
+   "target/"]
 
   :cljsbuild 
   {:builds 
