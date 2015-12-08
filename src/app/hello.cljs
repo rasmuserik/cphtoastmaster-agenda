@@ -26,15 +26,33 @@
     (.-TEXT_NODE dom) (str (.-textContent dom))))
 
 
+(defn xml-find [p xml]
+  (if (p xml) xml (some #(xml-find p %) (:children xml))))
+(defn xml-find-child [p xml] (some #(xml-find p %) (:children xml)))
+(defn xml->sxml [xml] 
+  (if (:tag xml)
+    [(:tag xml) (:attrs xml) (map xml->sxml (:children xml))]
+    xml))
 (go
   (let 
-    [club-site (<! (<ajax "//solsort.com/cors/http/tmclub.eu/portal.php?page=842" :result "text"))  
-     dom (.parseFromString  (js/DOMParser.) club-site "text/html")
-
-     dom (dom->clj dom)
-     ]
-    (aset js/document.body "innerHTML" (replace (str dom)
-                                                "<"
-                                                "&lt;"))
-  (js/console.log (clj->js dom)))
+    [club-site (<! (<ajax "http://tmclub.eu/portal.php?page=1&c=381" :result "text"))
+     next-meeting-url (re-find #"view_meeting.php.t=[0-9]*" club-site)
+     next-meeting-url "view_agenda.php?t=59916"
+     next-meeting (<! (<ajax (str "http://tmclub.eu/" next-meeting-url) :result "text"))
+     dom (.parseFromString  (js/DOMParser.) next-meeting "text/html") ]
+    (js/console.log "\n\n\n\n\n\n\n\n\n\n")
+    (js/console.log next-meeting-url)
+    (aset js/document.body "innerHTML" (replace next-meeting "<" "&lt;"))
+    ;(log (xml-find #(= "forumline" (:class (:attrs %))) (dom->clj dom)))
+    (doall
+      (map 
+      log
+         (->> (dom->clj dom)
+      (xml-find #(= "postbody;gen" (:class (:attrs %))))
+      (xml-find-child #(= :TBODY (:tag %)))
+      (xml-find-child #(= :TBODY (:tag %)))
+      (xml-find-child #(= :TBODY (:tag %)))
+      (xml->sxml)
+      )))
+    )
   )
