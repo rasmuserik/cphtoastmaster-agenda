@@ -40,7 +40,7 @@
                 :source-map-timestamp true }}
     {:id "dist"
      :source-paths ["src"]
-     :compiler {:output-to "www/index.js"
+     :compiler {:output-to "index.js"
                 :main app.hello
                 :externs ["externs.js"]
                 :optimizations :advanced
