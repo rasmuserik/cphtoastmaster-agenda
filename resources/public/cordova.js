@@ -1,1 +1,0 @@
-../../platforms/browser/platform_www/cordova.js
