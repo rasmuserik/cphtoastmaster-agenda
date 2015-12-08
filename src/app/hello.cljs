@@ -11,5 +11,6 @@
     [club-site (<! (<ajax "//solsort.com/cors/http/tmclub.eu/portal.php?page=842" :result "text"))  
      dom (.parseFromString  (js/DOMParser.) club-site "text/html")
      ]
+    (aset js/document.body "innerHTML" "hello")
   (js/console.log dom))
   )

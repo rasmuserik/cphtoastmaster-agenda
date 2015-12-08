@@ -2,6 +2,5 @@ target/
 resources/public/out/
 resources/public/index.js
 figwheel_server.log
-resources/app/platforms/
-resources/app/plugins/
-resources/app/www/index.js
+platforms/
+plugins/

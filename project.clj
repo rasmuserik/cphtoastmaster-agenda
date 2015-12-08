@@ -19,9 +19,9 @@
   :source-paths ["src/"]
 
   :clean-targets ^{:protect false} 
-  ["resources/app/www/index.js"
-   "resources/app/resources/out"
-   "resources/app/resources/index.js"
+  [
+   "resources/public/out"
+   "resources/public/index.js"
    "target/"
    "figwheel_server.log"
    ]
@@ -40,7 +40,7 @@
                 :source-map-timestamp true }}
     {:id "dist"
      :source-paths ["src"]
-     :compiler {:output-to "resources/app/www/index.js"
+     :compiler {:output-to "www/index.js"
                 :main app.hello
                 :externs ["externs.js"]
                 :optimizations :advanced
